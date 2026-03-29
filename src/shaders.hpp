@@ -38,6 +38,61 @@ protected:
 };
 
 
+// Partie 2 : pipeline de tessellation pour l'effet de gazon procédural
+class GrassShader : public ShaderProgram
+{
+public:
+    GLuint cameraPosULoc;
+    GLuint projViewULoc;
+
+protected:
+    virtual void load() override;
+    virtual void getAllUniformLocations() override;
+};
+
+
+// Partie 3 : shader de dessin des particules (VS→GS→FS)
+class ParticleDrawShader : public ShaderProgram
+{
+public:
+    GLuint modelViewULoc;
+    GLuint projectionULoc;
+    GLuint smokeTextureULoc;
+
+protected:
+    virtual void load() override;
+    virtual void getAllUniformLocations() override;
+};
+
+
+// Partie 3 : compute shader de mise à jour des particules
+class ParticleComputeShader : public ShaderProgram
+{
+public:
+    GLuint timeULoc;
+    GLuint deltaTimeULoc;
+    GLuint emitterPositionULoc;
+    GLuint emitterDirectionULoc;
+
+protected:
+    virtual void load() override;
+    virtual void getAllUniformLocations() override;
+};
+
+
+// Partie 1 : shader non-éclairé pour la spline Bézier
+class BezierShader : public ShaderProgram
+{
+public:
+    GLuint mvpULoc;
+    GLuint lineColorULoc;
+
+protected:
+    virtual void load() override;
+    virtual void getAllUniformLocations() override;
+};
+
+
 class CelShading : public ShaderProgram
 {
 public:

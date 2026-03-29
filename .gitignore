@@ -1,5 +1,6 @@
 # Visual Studio
 .vs/
+.vscode/
 *.user
 *.suo
 *.opensdf
@@ -10,6 +11,7 @@ Release/
 
 # CMake
 build/
+.cache/
 
 # Windows
 Thumbs.db

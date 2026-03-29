@@ -1,8 +1,10 @@
 #version 330 core
 
+// DONE: Coloration des particules avec texture de fumée (Partie 3)
 in ATTRIB_GS_OUT
 {
-    // TODO: Ajouter les attributs si nécessaire
+    vec4 color;
+    vec2 texCoord;
 } attribIn;
 
 out vec4 FragColor;
@@ -11,9 +13,12 @@ uniform sampler2D textureSampler;
 
 void main()
 {
-    // TODO: Colorier les particules.
-    //       La couleur finale est la couleur de la texture teinté
-    //       par la couleur de la particule.
-    //       Pour éviter de traiter des fragments invisibles, on discard
-    //       les fragments dont le texel possède moins de 0.02 d'opacité.
+    vec4 texColor = texture(textureSampler, attribIn.texCoord);
+
+    // E27: rejeter les fragments quasi-transparents
+    if (texColor.a < 0.02)
+        discard;
+
+    // E28: couleur finale = texture teintée par la couleur de la particule
+    FragColor = texColor * attribIn.color;
 }

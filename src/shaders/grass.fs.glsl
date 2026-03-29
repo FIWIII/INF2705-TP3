@@ -1,16 +1,16 @@
-#version 330 core
+#version 400 core
 
 in ATTRIBS_GS_OUT
 {
-    // TODO: Ajouter les attributs si nécessaire
+    float v; // paramètre de dégradé (0 = base, 1 = pointe)
 } attribsIn;
 
-
-out vec4 FragColor;
+out vec4 fragColor;
 
 void main()
 {
-    const vec3 GRASS_COLOR = vec3(0.6, 0.86, 0.21); 
-    
-    // TODO: Faite un dégradé pour que la base du brin d'herbe soit plus foncé.
+    // E12: dégradé du vert foncé (base) au vert clair (pointe)
+    const vec3 darkGreen  = vec3(0.1, 0.3, 0.05);
+    const vec3 lightGreen = vec3(0.3, 0.8, 0.1);
+    fragColor = vec4(mix(darkGreen, lightGreen, attribsIn.v), 1.0);
 }

@@ -11,6 +11,11 @@ set(ALL_FILES
     "main.cpp"
     "model.cpp"
     "car.cpp"
+    "shaders.cpp"
+    "textures.cpp"
+    "uniform_buffer.cpp"
+    "shader_storage_buffer.cpp"
+    "shader_program.cpp"
     # "../inf2705/Mesh.hpp"
     "../inf2705/OpenGLApplication.hpp"
     # "../inf2705/OrbitCamera.hpp"
@@ -28,7 +33,7 @@ set(ALL_FILES
 )
 add_executable(${PROJECT_NAME} ${ALL_FILES})
 
-include_directories("../")
+include_directories("." "../")
 
 # Les flags de compilation.
 if (WIN32)

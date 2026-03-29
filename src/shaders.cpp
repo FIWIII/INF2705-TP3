@@ -38,6 +38,78 @@ void Sky::getAllUniformLocations()
 }
 
 
+// Partie 2
+void GrassShader::load()
+{
+    name_ = "GrassShader";
+    loadShaderSource(GL_VERTEX_SHADER,          "./shaders/grass.vs.glsl");
+    loadShaderSource(GL_TESS_CONTROL_SHADER,    "./shaders/grass.tcs.glsl");
+    loadShaderSource(GL_TESS_EVALUATION_SHADER, "./shaders/grass.tes.glsl");
+    loadShaderSource(GL_GEOMETRY_SHADER,        "./shaders/grass.gs.glsl");
+    loadShaderSource(GL_FRAGMENT_SHADER,        "./shaders/grass.fs.glsl");
+    link();
+}
+
+void GrassShader::getAllUniformLocations()
+{
+    cameraPosULoc = glGetUniformLocation(id_, "cameraPos");
+    projViewULoc  = glGetUniformLocation(id_, "projView");
+}
+
+
+// Partie 3
+void ParticleDrawShader::load()
+{
+    name_ = "ParticleDrawShader";
+    loadShaderSource(GL_VERTEX_SHADER,   "./shaders/particlesDraw.vs.glsl");
+    loadShaderSource(GL_GEOMETRY_SHADER, "./shaders/particlesDraw.gs.glsl");
+    loadShaderSource(GL_FRAGMENT_SHADER, "./shaders/particlesDraw.fs.glsl");
+    link();
+}
+
+void ParticleDrawShader::getAllUniformLocations()
+{
+    modelViewULoc      = glGetUniformLocation(id_, "modelView");
+    projectionULoc     = glGetUniformLocation(id_, "projection");
+    smokeTextureULoc   = glGetUniformLocation(id_, "textureSampler");
+}
+
+
+void ParticleComputeShader::load()
+{
+    name_ = "ParticleComputeShader";
+    loadShaderSource(GL_COMPUTE_SHADER, "./shaders/particlesUpdate.cs.glsl");
+    link();
+}
+
+void ParticleComputeShader::getAllUniformLocations()
+{
+    timeULoc             = glGetUniformLocation(id_, "time");
+    deltaTimeULoc        = glGetUniformLocation(id_, "deltaTime");
+    emitterPositionULoc  = glGetUniformLocation(id_, "emitterPosition");
+    emitterDirectionULoc = glGetUniformLocation(id_, "emitterDirection");
+}
+
+
+// Partie 1
+void BezierShader::load()
+{
+    const char* VERTEX_SRC_PATH = "./shaders/bezier.vs.glsl";
+    const char* FRAGMENT_SRC_PATH = "./shaders/bezier.fs.glsl";
+
+    name_ = "BezierShader";
+    loadShaderSource(GL_VERTEX_SHADER, VERTEX_SRC_PATH);
+    loadShaderSource(GL_FRAGMENT_SHADER, FRAGMENT_SRC_PATH);
+    link();
+}
+
+void BezierShader::getAllUniformLocations()
+{
+    mvpULoc = glGetUniformLocation(id_, "mvp");
+    lineColorULoc = glGetUniformLocation(id_, "lineColor");
+}
+
+
 void CelShading::load()
 {
     const char* VERTEX_SRC_PATH = "./shaders/phong.vs.glsl";
